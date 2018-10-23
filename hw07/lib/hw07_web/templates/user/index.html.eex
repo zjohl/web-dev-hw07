@@ -5,6 +5,7 @@
     <tr>
       <th>Email</th>
       <th>Admin</th>
+      <th>Manager</th>
 
       <th></th>
     </tr>
@@ -14,6 +15,11 @@
     <tr>
       <td><%= user.email %></td>
       <td><%= user.admin %></td>
+      <td>
+        <%= if user.manager do %>
+            <%= user.manager.email %>
+        <% end %>
+      </td>
 
       <td>
 

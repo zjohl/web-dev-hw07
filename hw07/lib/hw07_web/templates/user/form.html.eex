@@ -10,6 +10,11 @@
     <%= text_input f, :email, class: "form-control" %>
     <%= error_tag f, :email %>
   </div>
+  <div "form-group">
+    <%= label f, :manager_id %>
+    <%= select f, :manager_id, @users, class: "form-control" %>
+    <%= error_tag f, :manager_id %>
+  </div>
   <div>
     <%= submit "Save", class: "btn btn-primary" %>
   </div>

@@ -7,7 +7,7 @@
       <th>Desc</th>
       <th>Completed</th>
       <th>Time spent</th>
-
+      <th>User Email</th>
       <th></th>
     </tr>
   </thead>
@@ -18,6 +18,7 @@
       <td><%= task.desc %></td>
       <td><%= task.completed %></td>
       <td><%= task.time_spent %></td>
+      <td><%= task.user.email %></td>
 
       <td>
         <%= link "Details", to: Routes.task_path(@conn, :show, task), class: "btn btn-secondary" %>

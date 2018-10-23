@@ -18,12 +18,21 @@ defmodule Hw07Web.TaskController do
       |> halt
     end
 
+    users = Users.list_underlings(conn.assigns[:current_user])
+
+    if (Enum.count(users) < 1) do
+      conn
+      |> put_flash(:error, "You need to have underlings to assign a task")
+      |> redirect(to: Routes.user_path(conn, :index))
+      |> halt
+    end
+
+    {_, default_user_id } = List.first(users)
     changeset = Tasks.change_task(%Task{
       completed: false,
       time_spent: 0,
-      user_id: conn.assigns[:current_user].id,
+      user_id: default_user_id,
     })
-    users = Users.list_user_emails
     render(conn, "new.html", changeset: changeset, users: users)
   end
 
@@ -35,7 +44,7 @@ defmodule Hw07Web.TaskController do
         |> redirect(to: Routes.task_path(conn, :show, task))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        users = Users.list_user_emails
+        users = Users.list_underlings(conn.assigns[:current_user])
         render(conn, "new.html", changeset: changeset, users: users)
     end
   end
@@ -55,7 +64,7 @@ defmodule Hw07Web.TaskController do
 
     task = Tasks.get_task!(id)
     changeset = Tasks.change_task(task)
-    users = Users.list_user_emails
+    users = Users.list_underlings(conn.assigns[:current_user])
     render(conn, "edit.html", task: task, changeset: changeset, users: users)
   end
 
@@ -69,7 +78,8 @@ defmodule Hw07Web.TaskController do
         |> redirect(to: Routes.task_path(conn, :show, task))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "edit.html", task: task, changeset: changeset)
+        users = Users.list_underlings(conn.assigns[:current_user])
+        render(conn, "edit.html", task: task, changeset: changeset, users: users)
     end
   end
 

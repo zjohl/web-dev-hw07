@@ -12,7 +12,8 @@ defmodule Hw07Web.UserController do
 
   def new(conn, _params) do
     changeset = Users.change_user(%User{})
-    render(conn, "new.html", changeset: changeset)
+    users = Users.list_potential_managers(0)
+    render(conn, "new.html", changeset: changeset, users: users)
   end
 
   def create(conn, %{"user" => user_params}) do
@@ -24,7 +25,8 @@ defmodule Hw07Web.UserController do
         |> redirect(to: Routes.task_path(conn, :index))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        users = Users.list_potential_managers(0)
+        render(conn, "new.html", changeset: changeset, users: users)
     end
   end
 
@@ -36,7 +38,8 @@ defmodule Hw07Web.UserController do
   def edit(conn, %{"id" => id}) do
     user = Users.get_user!(id)
     changeset = Users.change_user(user)
-    render(conn, "edit.html", user: user, changeset: changeset)
+    users = Users.list_potential_managers(id)
+    render(conn, "edit.html", user: user, changeset: changeset, users: users)
   end
 
   def update(conn, %{"id" => id, "user" => user_params}) do
@@ -49,7 +52,8 @@ defmodule Hw07Web.UserController do
         |> redirect(to: Routes.user_path(conn, :show, user))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "edit.html", user: user, changeset: changeset)
+        users = Users.list_potential_managers(id)
+        render(conn, "edit.html", user: user, changeset: changeset, users: users)
     end
   end
 

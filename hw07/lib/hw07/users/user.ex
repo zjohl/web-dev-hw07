@@ -7,6 +7,8 @@ defmodule Hw07.Users.User do
     field :admin, :boolean, default: false
     field :email, :string
     has_many :tasks, Hw07.Tasks.Task
+    belongs_to :manager, Hw07.Users.User
+    has_many :underlings, Hw07.Users.User, foreign_key: :manager_id
 
     timestamps()
   end
@@ -14,7 +16,7 @@ defmodule Hw07.Users.User do
   @doc false
   def changeset(user, attrs) do
     user
-    |> cast(attrs, [:email, :admin])
-    |> validate_required([:email, :admin])
+    |> cast(attrs, [:email, :admin, :manager_id])
+    |> validate_required([:email, :admin, :manager_id])
   end
 end

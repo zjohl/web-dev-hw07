@@ -11,6 +11,12 @@
     <%= @user.admin %>
   </li>
 
+  <li>
+      <strong>Manager Email:</strong>
+      <%= if @user.manager do %>
+          <%= @user.manager.email %>
+      <% end %>
+    </li>
 </ul>
 
 <h2>Tasks for this user</h2>

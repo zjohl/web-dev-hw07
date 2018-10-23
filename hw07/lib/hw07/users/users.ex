@@ -18,11 +18,15 @@ defmodule Hw07.Users do
 
   """
   def list_users do
-    Repo.all(User)
+    Repo.all from u in User, preload: [:manager]
   end
 
-  def list_user_emails do
-    Repo.all(from(u in User, select: {u.email, u.id}))
+  def list_underlings(user) do
+    Repo.all(from(u in User, select: {u.email, u.id}, where: u.manager_id == ^user.id))
+  end
+
+  def list_potential_managers(id) do
+    Repo.all(from(u in User, select: {u.email, u.id}, where: u.id != ^id))
   end
 
   @doc """
@@ -44,7 +48,7 @@ defmodule Hw07.Users do
   def get_user(id) do
     Repo.one from user in User,
       where: user.id == ^id,
-      preload: [:tasks]
+      preload: [:tasks, :manager]
   end
 
   def get_user_by_email(email) do
