@@ -32,7 +32,8 @@ defmodule Hw07Web.UserController do
 
   def show(conn, %{"id" => id}) do
     user = Users.get_user(id)
-    render(conn, "show.html", user: user)
+    underlings = Users.list_all_underlings(user)
+    render(conn, "show.html", user: user, underlings: underlings)
   end
 
   def edit(conn, %{"id" => id}) do

@@ -25,6 +25,10 @@ defmodule Hw07.Users do
     Repo.all(from(u in User, select: {u.email, u.id}, where: u.manager_id == ^user.id))
   end
 
+  def list_all_underlings(user) do
+    Repo.all(from(u in User, where: u.manager_id == ^user.id))
+  end
+
   def list_potential_managers(id) do
     Repo.all(from(u in User, select: {u.email, u.id}, where: u.id != ^id))
   end

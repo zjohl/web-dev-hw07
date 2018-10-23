@@ -19,6 +19,30 @@
     </li>
 </ul>
 
+<%= if Enum.count(@underlings) > 0 do %>
+<h2>Underlings</h2>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Email</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= for user <- @underlings do %>
+    <tr>
+      <td><%= user.email %></td>
+
+      <td>
+        <%= link "Show", to: Routes.user_path(@conn, :show, user), class: "btn btn-secondary" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+<% end %>
+
 <h2>Tasks for this user</h2>
 <table class="table table-striped">
   <thead>
