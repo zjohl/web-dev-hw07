@@ -31,7 +31,7 @@ defmodule Hw07Web.Router do
     resources "/sessions", SessionController, only: [:create, :delete], singleton: true
   end
 
-  scope "/ajax", HuskyShopWeb do
+  scope "/ajax", Hw07Web do
     pipe_through :ajax
     resources "/time_blocks", TimeBlockController, except: [:new, :edit]
   end

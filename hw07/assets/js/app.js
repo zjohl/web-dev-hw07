@@ -1,7 +1,7 @@
 import jQuery from 'jquery';
 window.jQuery = window.$ = jQuery; // Bootstrap requires a global "$" object.
 import "bootstrap";
-
+import _ from "lodash";
 
 // We need to import the CSS so that webpack will load it.
 // The MiniCssExtractPlugin is used to separate it out into
@@ -20,3 +20,15 @@ import "phoenix_html"
 //
 // Local files can be imported directly using relative paths, for example:
 // import socket from "./socket"
+
+$(function () {
+    $('#start-working-button').click((ev) => {
+
+
+    }
+
+    $('#stop-working-button').click((ev) => {
+
+
+    }
+}

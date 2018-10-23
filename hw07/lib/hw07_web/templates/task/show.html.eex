@@ -32,7 +32,13 @@
     </div>
 
     <div class="col-4">
-        <span><%= link "Start Working", to: "#", class: "btn btn-primary" %></span>
-        <span><%= link "Stop Working", to: "#", class: "btn btn-danger" %></span>
+        <button id="start-working-button"
+            class="btn btn-primary">Start Working
+        </button>
+         <button id="stop-working-button"
+            data-task-id="<%= @task.id %>"
+            data-start-time=""
+            class="btn btn-danger">Stop Working
+        </button>
     </div>
 </div>
