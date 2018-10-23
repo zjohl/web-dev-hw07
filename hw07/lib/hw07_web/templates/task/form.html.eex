@@ -13,22 +13,17 @@
 
     <div "form-group">
       <%= label f, :desc %>
-      <%= textarea f, :desc %>
+      <%= textarea f, :desc, class: "form-control" %>
 
       <%= error_tag f, :desc %>
     </div>
 
     <div "form-group">
       <%= label f, :completed %>
-      <%= checkbox f, :completed %>
+      <%= checkbox f, :completed, class: "form-control" %>
       <%= error_tag f, :completed %>
     </div>
 
-    <div "form-group">
-      <%= label f, :time_spent %>
-      <%= number_input f, :time_spent, class: "form-control" %>
-      <%= error_tag f, :time_spent %>
-    </div>
     <div "form-group">
       <%= label f, :user_id %>
       <%= select f, :user_id, @users, class: "form-control" %>

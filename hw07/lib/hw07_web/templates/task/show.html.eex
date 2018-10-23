@@ -1,28 +1,38 @@
-<h1>Show Task</h1>
+<div class="row">
 
-<ul>
+    <div class="col-8">
+        <h1>Show Task</h1>
+        <ul>
 
-  <li>
-    <strong>Title:</strong>
-    <%= @task.title %>
-  </li>
+          <li>
+            <strong>Title:</strong>
+            <%= @task.title %>
+          </li>
 
-  <li>
-    <strong>Desc:</strong>
-    <%= @task.desc %>
-  </li>
+          <li>
+            <strong>Desc:</strong>
+            <%= @task.desc %>
+          </li>
 
-  <li>
-    <strong>Completed:</strong>
-    <%= @task.completed %>
-  </li>
+          <li>
+            <strong>Completed:</strong>
+            <%= @task.completed %>
+          </li>
 
-  <li>
-    <strong>Time spent:</strong>
-    <%= @task.time_spent %>
-  </li>
+          <li>
+            <strong>Time spent:</strong>
+            <%= @task.time_spent %>
+          </li>
 
-</ul>
+        </ul>
 
-<span><%= link "Edit", to: Routes.task_path(@conn, :edit, @task), class: "btn btn-secondary" %></span>
-<span><%= link "Back", to: Routes.task_path(@conn, :index), class: "btn btn-info" %></span>
+        <span><%= link "Edit", to: Routes.task_path(@conn, :edit, @task), class: "btn btn-secondary" %></span>
+        <span><%= link "Back", to: Routes.task_path(@conn, :index), class: "btn btn-info" %></span>
+
+    </div>
+
+    <div class="col-4">
+        <span><%= link "Start Working", to: "#", class: "btn btn-primary" %></span>
+        <span><%= link "Stop Working", to: "#", class: "btn btn-danger" %></span>
+    </div>
+</div>

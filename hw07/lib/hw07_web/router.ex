@@ -10,6 +10,13 @@ defmodule Hw07Web.Router do
     plug Hw07Web.Plugs.FetchSession
   end
 
+  pipeline :ajax do
+    plug :accepts, ["json"]
+    plug :fetch_session
+    plug :fetch_flash
+    plug Hw07Web.Plugs.FetchSession # FIXME: "FetchUser"
+  end
+
   pipeline :api do
     plug :accepts, ["json"]
   end
@@ -22,6 +29,10 @@ defmodule Hw07Web.Router do
     resources "/tasks", TaskController
     resources "/users", UserController
     resources "/sessions", SessionController, only: [:create, :delete], singleton: true
+  end
+
+  scope "/ajax", HuskyShopWeb do
+    pipe_through :ajax
     resources "/time_blocks", TimeBlockController, except: [:new, :edit]
   end
 

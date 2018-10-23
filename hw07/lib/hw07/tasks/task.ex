@@ -9,6 +9,7 @@ defmodule Hw07.Tasks.Task do
     field :time_spent, :integer
     field :title, :string
     belongs_to :user, Hw07.Users.User
+    has_many :time_blocks, Hw07.TimeBlocks.TimeBlock
 
     timestamps()
   end
