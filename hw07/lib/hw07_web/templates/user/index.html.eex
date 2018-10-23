@@ -1,0 +1,31 @@
+<h1>Listing Users</h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Email</th>
+      <th>Admin</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for user <- @users do %>
+    <tr>
+      <td><%= user.email %></td>
+      <td><%= user.admin %></td>
+
+      <td>
+
+        <%= link "Show", to: Routes.user_path(@conn, :show, user), class: "btn btn-secondary" %>
+        <% if @current_user && @current_user.admin do %>
+          <%= link "Edit", to: Routes.user_path(@conn, :edit, user), class: "btn btn-info" %>
+          <%= link "Delete", to: Routes.user_path(@conn, :delete, user), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger" %>
+        <% end %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "Sign Up", to: Routes.user_path(@conn, :new), class: "btn btn-primary" %></span>
