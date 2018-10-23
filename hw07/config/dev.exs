@@ -68,8 +68,8 @@ config :phoenix, :plug_init_mode, :runtime
 
 # Configure your database
 config :hw07, Hw07.Repo,
-  username: "hw07",
+  username: "hw06",
   password: "postgres",
-  database: "hw07_dev",
+  database: "hw06_dev",
   hostname: "localhost",
   pool_size: 10
