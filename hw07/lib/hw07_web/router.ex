@@ -22,6 +22,7 @@ defmodule Hw07Web.Router do
     resources "/tasks", TaskController
     resources "/users", UserController
     resources "/sessions", SessionController, only: [:create, :delete], singleton: true
+    resources "/time_blocks", TimeBlockController, except: [:new, :edit]
   end
 
   # Other scopes may use custom stacks.
