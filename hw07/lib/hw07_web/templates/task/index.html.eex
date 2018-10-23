@@ -21,7 +21,7 @@
       <td><%= task.user.email %></td>
 
       <td>
-        <%= if task.user.manager_id == @current_user.id do %>
+        <%= if @current_user && task.user.manager_id == @current_user.id do %>
           <%= link "Details", to: Routes.task_path(@conn, :show, task), class: "btn btn-secondary" %>
           <%= link "Edit", to: Routes.task_path(@conn, :edit, task), class: "btn btn-info" %>
           <%= link "Delete", to: Routes.task_path(@conn, :delete, task), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger" %>
