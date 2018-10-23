@@ -21,6 +21,13 @@ defmodule Hw07.Tasks do
     Repo.all from t in Task, preload: [:user]
   end
 
+  def task_report(user) do
+    Repo.all from t in Task,
+       left_join: u in assoc(t, :user),
+       where: u.manager_id == ^user.id,
+       preload: [:user]
+  end
+
   @doc """
   Gets a single task.
 

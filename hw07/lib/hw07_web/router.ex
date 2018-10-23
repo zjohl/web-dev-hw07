@@ -18,6 +18,7 @@ defmodule Hw07Web.Router do
     pipe_through :browser
 
     get "/", TaskController, :index
+    get "/task_report", TaskController, :task_report
     resources "/tasks", TaskController
     resources "/users", UserController
     resources "/sessions", SessionController, only: [:create, :delete], singleton: true

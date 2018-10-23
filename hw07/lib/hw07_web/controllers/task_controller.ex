@@ -98,4 +98,16 @@ defmodule Hw07Web.TaskController do
     |> put_flash(:info, "Task deleted successfully.")
     |> redirect(to: Routes.task_path(conn, :index))
   end
+
+  def task_report(conn, _params) do
+    if (!conn.assigns[:current_user]) do
+      conn
+      |> put_flash(:error, "You need to be logged in to generate a task report")
+      |> redirect(to: Routes.user_path(conn, :index))
+      |> halt
+    end
+
+    tasks = Tasks.task_report(conn.assigns[:current_user])
+    render(conn, "index.html", tasks: tasks)
+  end
 end
