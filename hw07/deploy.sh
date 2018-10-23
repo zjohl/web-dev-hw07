@@ -1,7 +1,7 @@
 #!/bin/bash
 
 export MIX_ENV=prod
-export PORT=4747
+export PORT=4748
 
 mix deps.get --only prod
 mix ecto.create
