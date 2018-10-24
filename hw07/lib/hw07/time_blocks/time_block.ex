@@ -4,8 +4,8 @@ defmodule Hw07.TimeBlocks.TimeBlock do
 
 
   schema "time_blocks" do
-    field :end_time, :naive_datetime
-    field :start_time, :naive_datetime
+    field :end_time, :integer
+    field :start_time, :integer
     belongs_to :task, Hw07.Tasks.Task
 
     timestamps()

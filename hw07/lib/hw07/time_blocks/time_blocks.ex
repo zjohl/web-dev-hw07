@@ -21,6 +21,10 @@ defmodule Hw07.TimeBlocks do
     Repo.all(TimeBlock)
   end
 
+  def get_time_blocks(task_id) do
+    Repo.all(from(t in TimeBlock, where: t.task_id == ^task_id))
+  end
+
   @doc """
   Gets a single time_block.
 

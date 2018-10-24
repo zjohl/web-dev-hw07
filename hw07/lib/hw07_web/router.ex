@@ -14,7 +14,7 @@ defmodule Hw07Web.Router do
     plug :accepts, ["json"]
     plug :fetch_session
     plug :fetch_flash
-    plug Hw07Web.Plugs.FetchSession # FIXME: "FetchUser"
+    plug Hw07Web.Plugs.FetchSession
   end
 
   pipeline :api do
