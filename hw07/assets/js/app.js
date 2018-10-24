@@ -25,23 +25,25 @@ $(function () {
     function update_page(time_block) {
         let start_time = new Date(time_block.start_time);
         let end_time = new Date(time_block.end_time);
-        return `<span>Started at: ${start_time.toISOString()}</span><span>  Ended at: ${end_time.toISOString()}</span>`;
+        return `<div class="row"><span>Started at: ${start_time.toISOString()}</span><span>  Ended at: ${end_time.toISOString()}</span><button class="btn btn-warning delete-button"  data-method="delete" data-to="/ajax/time_blocks/${time_block.id}">Delete</button></div>`;
     }
 
     function update_time_blocks(task_id) {
         $('#start-working-button').removeClass("disabled");
         $('#time-display').text('Not currently working on this task')
 
-        $.ajax(`/ajax/time_blocks/${task_id}`, {
-            method: "get",
-            dataType: "json",
-            contentType: "application/json; charset=UTF-8",
-            data: "",
-            success: (resp) => {
-                let text = _.map(resp.data, update_page);
-                $("#time-blocks").html(text);
-            },
-        });
+        setTimeout(function(){
+            $.ajax(`/ajax/time_blocks/${task_id}`, {
+                method: "get",
+                dataType: "json",
+                contentType: "application/json; charset=UTF-8",
+                data: "",
+                success: (resp) => {
+                    let text = _.map(resp.data, update_page);
+                    $("#time-blocks").html(text);
+                },
+            });
+        }, 1000);
     }
 
     $('#start-working-button').click((ev) => {
@@ -51,6 +53,21 @@ $(function () {
 
         $('#start-working-button').addClass("disabled");
         $('#stop-working-button').removeClass("disabled");
+    });
+
+    $('.delete-button').click((ev) => {
+        setTimeout(function(){
+            $.ajax(`/ajax/time_blocks/${$('#stop-working-button').attr('data-task-id')}`, {
+                method: "get",
+                dataType: "json",
+                contentType: "application/json; charset=UTF-8",
+                data: "",
+                success: (resp) => {
+                    let text = _.map(resp.data, update_page);
+                    $("#time-blocks").html(text);
+                },
+            });
+        }, 1000);
     });
 
     $('#stop-working-button').click((ev) => {
@@ -73,9 +90,7 @@ $(function () {
             dataType: "json",
             contentType: "application/json; charset=UTF-8",
             data: body,
-            success: (resp) => {
-                update_time_blocks(task_id);
-            },
         });
+        update_time_blocks(task_id);
     });
 });
