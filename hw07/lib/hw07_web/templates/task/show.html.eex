@@ -43,7 +43,7 @@
         <div id="time-blocks" class="row">
             <%= Enum.map @task.time_blocks, fn time_block ->  %>
                 <span>Started at: <%= DateTime.from_unix!(time_block.start_time, :millisecond) %></span>
-                <span>Ended at:<%= DateTime.from_unix!(time_block.end_time, :millisecond) %></span>
+                <span>  Ended at:<%= DateTime.from_unix!(time_block.end_time, :millisecond) %></span>
             <% end %>
         </div>
     </div>

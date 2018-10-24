@@ -25,7 +25,7 @@ $(function () {
     function update_page(time_block) {
         let start_time = new Date(time_block.start_time);
         let end_time = new Date(time_block.end_time);
-        return `<span>Started at: ${start_time.toISOString()}</span><span>Ended at: ${end_time.toISOString()}</span>`;
+        return `<span>Started at: ${start_time.toISOString()}</span><span>  Ended at: ${end_time.toISOString()}</span>`;
     }
 
     function update_time_blocks(task_id) {

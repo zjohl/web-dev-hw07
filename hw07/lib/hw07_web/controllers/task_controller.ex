@@ -3,7 +3,9 @@ defmodule Hw07Web.TaskController do
 
   alias Hw07.Tasks
   alias Hw07.Users
+  alias Hw07.TimeBlocks
   alias Hw07.Tasks.Task
+  alias Hw07.TimeBlocks.TimeBlock
 
   def index(conn, _params) do
     tasks = Tasks.list_tasks()
@@ -51,7 +53,10 @@ defmodule Hw07Web.TaskController do
 
   def show(conn, %{"id" => id}) do
     task = Tasks.get_task!(id)
-    render(conn, "show.html", task: task)
+    changeset = TimeBlocks.change_time_block(%TimeBlock{
+      task_id: task.id,
+    })
+    render(conn, "show.html", task: task, changeset: changeset)
   end
 
   def edit(conn, %{"id" => id}) do
