@@ -31,12 +31,12 @@
               <% end %>
             <div "form-group">
               <%= label f, :start_time %>
-              <%= datetime_local_input f, :start_time, class: "form-control" %>
+              <%= text_input f, :start_time, class: "form-control" %>
               <%= error_tag f, :start_time %>
             </div>
             <div "form-group">
               <%= label f, :end_time %>
-              <%= datetime_local_input f, :end_time, class: "form-control" %>
+              <%= text_input f, :end_time, class: "form-control" %>
               <%= error_tag f, :end_time %>
             </div>
             <%= hidden_input f, :task_id, value: @task.id %>
