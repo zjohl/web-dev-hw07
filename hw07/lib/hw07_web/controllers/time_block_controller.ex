@@ -13,7 +13,8 @@ defmodule Hw07Web.TimeBlockController do
     with {:ok, %TimeBlock{} = time_block} <- TimeBlocks.create_time_block(time_block_params) do
       conn
       |> put_status(200)
-      |> redirect(to: Routes.task_path(conn, :show, time_block.task_id))
+      |> put_resp_header("location", Routes.time_block_path(conn, :show, time_block))
+      |> render("show.json", time_block: time_block)
     else err ->
       conn
       |> put_status(500)
@@ -31,7 +32,7 @@ defmodule Hw07Web.TimeBlockController do
 
     with {:ok, %TimeBlock{} = time_block} <- TimeBlocks.update_time_block(time_block, time_block_params) do
       conn
-      |> redirect(to: Routes.task_path(conn, :show, time_block.task_id))
+      |> render(conn, "show.json", time_block: time_block)
     else err ->
       conn
       |> put_status(500)

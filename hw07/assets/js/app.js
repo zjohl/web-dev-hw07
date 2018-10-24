@@ -32,18 +32,16 @@ $(function () {
         $('#start-working-button').removeClass("disabled");
         $('#time-display').text('Not currently working on this task')
 
-        setTimeout(function(){
-            $.ajax(`/ajax/time_blocks/${task_id}`, {
-                method: "get",
-                dataType: "json",
-                contentType: "application/json; charset=UTF-8",
-                data: "",
-                success: (resp) => {
-                    let text = _.map(resp.data, update_page);
-                    $("#time-blocks").html(text);
-                },
-            });
-        }, 1000);
+        $.ajax(`/ajax/time_blocks/${task_id}`, {
+            method: "get",
+            dataType: "json",
+            contentType: "application/json; charset=UTF-8",
+            data: "",
+            success: (resp) => {
+                let text = _.map(resp.data, update_page);
+                $("#time-blocks").html(text);
+            },
+        });
     }
 
     $('#start-working-button').click((ev) => {
@@ -91,7 +89,9 @@ $(function () {
             dataType: "json",
             contentType: "application/json; charset=UTF-8",
             data: body,
+            success: (resp) => {
+                update_time_blocks(task_id);
+            },
         });
-        update_time_blocks(task_id);
     });
 });
