@@ -56,6 +56,7 @@ $(function () {
     });
 
     $('.delete-button').click((ev) => {
+        $(ev.currentTarget).addClass("disabled");
         setTimeout(function(){
             $.ajax(`/ajax/time_blocks/${$('#stop-working-button').attr('data-task-id')}`, {
                 method: "get",
